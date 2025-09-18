@@ -50,14 +50,23 @@ public class FizzBuzzMenuTest {
 
         List<Integer> numbers = extractNumbers(output);
         
-        int fizzCount = 0;
-        for (int num : numbers) {
-            if (num % 3 == 0) {
-                fizzCount++;
+        // Check for specific expected Fizz numbers (multiples of 3 from 1-100)
+        List<Integer> expectedFizzNumbers = new ArrayList<>();
+        for (int i = 1; i <= 100; i++) {
+            if (i % 3 == 0) {
+                expectedFizzNumbers.add(i);
             }
         }
-        assertTrue(fizzCount >= 10, 
-            "❌ Option 1 should display numbers that are multiples of 3. Found only " + fizzCount + " such numbers. Examples: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99");
+        
+        int correctFizzCount = 0;
+        for (Integer expectedNum : expectedFizzNumbers) {
+            if (numbers.contains(expectedNum)) {
+                correctFizzCount++;
+            }
+        }
+        
+        assertTrue(correctFizzCount >= 10, 
+            "❌ Option 1 should display the correct Fizz numbers (multiples of 3). Found only " + correctFizzCount + " correct numbers out of " + expectedFizzNumbers.size() + " expected. Expected: " + expectedFizzNumbers.subList(0, Math.min(10, expectedFizzNumbers.size())) + "...");
 
         assertTrue(output.contains("4") || output.contains("Exit") || output.contains("Goodbye"), 
             "❌ Your program should handle option 4 to exit properly!");
@@ -148,26 +157,22 @@ public class FizzBuzzMenuTest {
 
         List<Integer> numbers = extractNumbers(output);
         
-        boolean hasMultiplesOf3 = false;
-        for (int num : numbers) {
-            if (num % 3 == 0) {
-                hasMultiplesOf3 = true;
-                break;
-            }
-        }
-        assertTrue(hasMultiplesOf3, "❌ Option 1 should show numbers divisible by 3 (like 3, 6, 9, 12, 15, 18, 21, etc.)!");
-        
-        int only3Count = 0;
-        int bothCount = 0;
-        for (int num : numbers) {
-            if (num % 3 == 0 && num % 5 != 0) {
-                only3Count++;
-            } else if (num % 3 == 0 && num % 5 == 0) {
-                bothCount++;
+        // Check for specific expected Fizz numbers (multiples of 3 from 1-100)
+        List<Integer> expectedFizzNumbers = new ArrayList<>();
+        for (int i = 1; i <= 100; i++) {
+            if (i % 3 == 0) {
+                expectedFizzNumbers.add(i);
             }
         }
         
-        assertTrue(only3Count + bothCount >= 10, "❌ Option 1 should show at least 10 numbers divisible by 3!");
+        int correctFizzCount = 0;
+        for (Integer expectedNum : expectedFizzNumbers) {
+            if (numbers.contains(expectedNum)) {
+                correctFizzCount++;
+            }
+        }
+        
+        assertTrue(correctFizzCount >= 10, "❌ Option 1 should show the correct Fizz numbers (multiples of 3). Found only " + correctFizzCount + " correct numbers out of " + expectedFizzNumbers.size() + " expected!");
     }
 
     @Test
